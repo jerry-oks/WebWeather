@@ -62,7 +62,7 @@ final class ViewController: UIViewController {
             message: """
                      Today - \(date)
                      
-                     Today is \(weather.fact.temp)°C, feels like \(weather.fact.feels_like)°C, \(weather.fact.condition)
+                     Now is \(weather.fact.temp)°C, feels like \(weather.fact.feels_like)°C, \(weather.fact.condition)
                      
                      Forecast:\(forecast)
                      """,
