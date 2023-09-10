@@ -49,11 +49,18 @@ final class ViewController: UIViewController {
             forecast += "night: \(forecastWeather.parts.night.temp_avg)°C, feels like \(forecastWeather.parts.night.feels_like)°C, \(forecastWeather.parts.night.condition)"
         }
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let date = formatter.string(
+            from: Date(
+                timeIntervalSince1970: TimeInterval(weather.now)
+            )
+        )
         
         let alert = UIAlertController(
             title: "Weather in \(weather.geo_object.country.name), \(weather.geo_object.province.name)",
             message: """
-                     Today - \(Date.now)
+                     Today - \(date)
                      
                      Today is \(weather.fact.temp)°C, feels like \(weather.fact.feels_like)°C, \(weather.fact.condition)
                      
@@ -82,4 +89,3 @@ final class ViewController: UIViewController {
     }
     
 }
-
