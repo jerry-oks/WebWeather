@@ -7,31 +7,31 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
-    @IBOutlet var dateLabel: UILabel!
-    
-    @IBOutlet var shortImage: UIImageView!
-    @IBOutlet var shortTemp: UILabel!
-    @IBOutlet var shortCondition: UILabel!
-    @IBOutlet var shortView: UIView!
-    
+final class CollectionViewCell: UICollectionViewCell {
     @IBOutlet var selectedStack: UIStackView!
+
+    @IBOutlet private var dateLabel: UILabel!
     
-    @IBOutlet var nightImage: UIImageView!
-    @IBOutlet var nightTemp: UILabel!
-    @IBOutlet var nightCondition: UILabel!
+    @IBOutlet private var shortImage: UIImageView!
+    @IBOutlet private var shortTemp: UILabel!
+    @IBOutlet private var shortCondition: UILabel!
+    @IBOutlet private var shortView: UIView!
+
+    @IBOutlet private var nightImage: UIImageView!
+    @IBOutlet private var nightTemp: UILabel!
+    @IBOutlet private var nightCondition: UILabel!
     
-    @IBOutlet var morningImage: UIImageView!
-    @IBOutlet var morningTemp: UILabel!
-    @IBOutlet var morningCondition: UILabel!
+    @IBOutlet private var morningImage: UIImageView!
+    @IBOutlet private var morningTemp: UILabel!
+    @IBOutlet private var morningCondition: UILabel!
     
-    @IBOutlet var dayImage: UIImageView!
-    @IBOutlet var dayTemp: UILabel!
-    @IBOutlet var dayCondition: UILabel!
+    @IBOutlet private var dayImage: UIImageView!
+    @IBOutlet private var dayTemp: UILabel!
+    @IBOutlet private var dayCondition: UILabel!
     
-    @IBOutlet var eveningImage: UIImageView!
-    @IBOutlet var eveningTemp: UILabel!
-    @IBOutlet var eveningCondition: UILabel!
+    @IBOutlet private var eveningImage: UIImageView!
+    @IBOutlet private var eveningTemp: UILabel!
+    @IBOutlet private var eveningCondition: UILabel!
     
     func configureCell(at index: Int, with forecast: DayForecastWeather) {
         setupTitleTabel()
@@ -68,11 +68,11 @@ class CollectionViewCell: UICollectionViewCell {
                 forecast.parts.evening.tempAvg
             ].max()?.temp() ?? ""
             
+            //shortView.backgroundColor =
             shortImage.image = UIImage(systemName: forecast.parts.day.condition.image)?
                 .withRenderingMode(.alwaysOriginal)
             shortTemp.text = tempMin + "..." + tempMax
             shortCondition.text = forecast.parts.day.condition.formatted
-          //shortView.backgroundColor =
         }
         
         func setupExpandedCell() {

@@ -94,12 +94,13 @@ private extension MainViewController {
     }
     
     func setupInterface() {
+//        factView.backgroundColor =
         cityLabel.text = "Сейчас в городе \(weather.geoObject.province.name)".uppercased()
         factIV.image = UIImage(systemName: weather.fact.condition.image)?.withRenderingMode(.alwaysOriginal)
         factTempLabel.text = weather.fact.temp.temp()
         feelsLikeTempLabel.text = "ощущается как " + weather.fact.feelsLike.temp()
         conditionLabel.text = weather.fact.condition.formatted
-        
+
         detailsLabel.text =
             """
             \(weather.fact.windSpeed) м/с

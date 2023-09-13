@@ -12,19 +12,12 @@ protocol MainViewControllerDelegate: AnyObject {
 }
 
 final class CollectionViewController: UICollectionViewController {
+    
+    // MARK: - Private Properties
     private var cellsIsSelected = Array(repeating: false, count: 7)
-
     private var forecasts: [DayForecastWeather] = []
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-//        updateForecastWeather()
-    }
-}
-
-// MARK: UICollectionViewDataSource
-extension CollectionViewController {
+    
+    // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
@@ -45,10 +38,8 @@ extension CollectionViewController {
         
         return cell
     }
-}
-
-// MARK: UICollectionViewDelegate
-extension CollectionViewController {
+    
+    // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else { return }
@@ -71,7 +62,6 @@ extension CollectionViewController {
     }
 }
 
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -91,21 +81,6 @@ extension CollectionViewController: MainViewControllerDelegate {
         self.forecasts = forecasts
         collectionView.reloadData()
     }
-    
-    
-    
-//    func updateForecastWeather() {
-//        NetworkManager.shared.fetchWeather(from: RequestURL.getURL()) { [weak self] result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let weather):
-//                    self?.forecasts = weather.forecasts
-//                    self?.collectionView.reloadData()
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
-//        }    }
 }
 
 
