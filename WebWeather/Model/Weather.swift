@@ -98,7 +98,6 @@ enum Condition: String, Decodable {
 }
     
 struct Weather: Decodable {
-    let now: Int
     let geoObject: GeoObject
     let fact: FactWeather
     let forecasts: [DayForecastWeather]
@@ -116,7 +115,6 @@ struct FactWeather: Decodable {
 }
 
 struct GeoObject: Decodable {
-    let country: GeoObjectName
     let province: GeoObjectName
 }
 
