@@ -156,7 +156,7 @@ struct RequestURL {
             lat: "55.751244",
             lon: "37.618423",
             lang: "ru_RU",
-            limit: "4",
+            limit: "7",
             hours: "false",
             extra: "false",
             key: "f5218a8d-a6a9-4096-bac4-add967d8bc77"

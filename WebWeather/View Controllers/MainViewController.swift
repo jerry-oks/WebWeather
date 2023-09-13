@@ -27,16 +27,19 @@ final class MainViewController: UIViewController {
     
     private var weather: Weather!
     
+    unowned var delegate: MainViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         updateWeather()
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard let collectionVC = segue.destination as? CollectionViewController else { return }
-//        collectionVC.forecasts = weather.forecasts
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let collectionVC = segue.destination as? CollectionViewController else { return }
+        
+        delegate = collectionVC
+    }
     
     private func showFailAlert() {
         let alert = UIAlertController(
@@ -95,6 +98,7 @@ final class MainViewController: UIViewController {
                 case .success(let weather):
                     self?.weather = weather
                     self?.setupInterface()
+                    self?.delegate.updateForecast(with: weather.forecasts)
                     self?.showInterface()
                     print(weather)
                 case .failure(let error):
