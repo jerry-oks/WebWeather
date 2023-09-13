@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		3B29109F2AADF82D00C59E9A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B29109E2AADF82D00C59E9A /* AppDelegate.swift */; };
 		3B2910A12AADF82D00C59E9A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2910A02AADF82D00C59E9A /* SceneDelegate.swift */; };
-		3B2910A32AADF82D00C59E9A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2910A22AADF82D00C59E9A /* ViewController.swift */; };
+		3B2910A32AADF82D00C59E9A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2910A22AADF82D00C59E9A /* MainViewController.swift */; };
 		3B2910A62AADF82D00C59E9A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2910A42AADF82D00C59E9A /* Main.storyboard */; };
 		3B2910A82AADF82E00C59E9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B2910A72AADF82E00C59E9A /* Assets.xcassets */; };
 		3B2910AB2AADF82E00C59E9A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2910A92AADF82E00C59E9A /* LaunchScreen.storyboard */; };
 		3B2910B72AADFA6300C59E9A /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2910B62AADFA6300C59E9A /* Weather.swift */; };
+		3B3CE0382AB04FC6001AB752 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3CE0372AB04FC6001AB752 /* NetworkManager.swift */; };
+		3B3CE03D2AB076F9001AB752 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */; };
+		3B43B5432AB08A7E007FC659 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B43B5422AB08A7E007FC659 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B29109B2AADF82D00C59E9A /* WebWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B29109E2AADF82D00C59E9A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B2910A02AADF82D00C59E9A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3B2910A22AADF82D00C59E9A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3B2910A22AADF82D00C59E9A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3B2910A52AADF82D00C59E9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B2910A72AADF82E00C59E9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B2910AA2AADF82E00C59E9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B2910AC2AADF82E00C59E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B2910B62AADFA6300C59E9A /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		3B3CE0372AB04FC6001AB752 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		3B43B5422AB08A7E007FC659 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,8 @@
 		3B29109D2AADF82D00C59E9A /* WebWeather */ = {
 			isa = PBXGroup;
 			children = (
+				3B43B53F2AB0895A007FC659 /* Views */,
+				3B3CE0362AB04FB2001AB752 /* Services */,
 				3B2910B52AADFA5100C59E9A /* Model */,
 				3B2910B22AADF84F00C59E9A /* App */,
 				3B2910B32AADF85700C59E9A /* View Controllers */,
@@ -80,7 +88,8 @@
 		3B2910B32AADF85700C59E9A /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3B2910A22AADF82D00C59E9A /* ViewController.swift */,
+				3B2910A22AADF82D00C59E9A /* MainViewController.swift */,
+				3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -100,6 +109,22 @@
 				3B2910B62AADFA6300C59E9A /* Weather.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		3B3CE0362AB04FB2001AB752 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3B3CE0372AB04FC6001AB752 /* NetworkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3B43B53F2AB0895A007FC659 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B43B5422AB08A7E007FC659 /* CollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,8 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B3CE03D2AB076F9001AB752 /* CollectionViewController.swift in Sources */,
 				3B2910B72AADFA6300C59E9A /* Weather.swift in Sources */,
-				3B2910A32AADF82D00C59E9A /* ViewController.swift in Sources */,
+				3B2910A32AADF82D00C59E9A /* MainViewController.swift in Sources */,
+				3B43B5432AB08A7E007FC659 /* CollectionViewCell.swift in Sources */,
+				3B3CE0382AB04FC6001AB752 /* NetworkManager.swift in Sources */,
 				3B29109F2AADF82D00C59E9A /* AppDelegate.swift in Sources */,
 				3B2910A12AADF82D00C59E9A /* SceneDelegate.swift in Sources */,
 			);
