@@ -98,7 +98,6 @@ enum Condition: String, Decodable {
 }
     
 struct Weather: Decodable {
-    let now: Int
     let geoObject: GeoObject
     let fact: FactWeather
     let forecasts: [DayForecastWeather]
@@ -116,7 +115,6 @@ struct FactWeather: Decodable {
 }
 
 struct GeoObject: Decodable {
-    let country: GeoObjectName
     let province: GeoObjectName
 }
 
@@ -156,7 +154,7 @@ struct RequestURL {
             lat: "55.751244",
             lon: "37.618423",
             lang: "ru_RU",
-            limit: "4",
+            limit: "7",
             hours: "false",
             extra: "false",
             key: "f5218a8d-a6a9-4096-bac4-add967d8bc77"

@@ -7,20 +7,17 @@
 
 import UIKit
 
-final class CollectionViewController: UICollectionViewController {
-    private var cellsIsSelected = Array(repeating: false, count: 7)
-
-    private var forecasts: [DayForecastWeather] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        updateForecastWeather()
-    }
+protocol MainViewControllerDelegate: AnyObject {
+    func updateForecast(with forecasts: [DayForecastWeather])
 }
 
-// MARK: UICollectionViewDataSource
-extension CollectionViewController {
+final class CollectionViewController: UICollectionViewController {
+    
+    // MARK: - Private Properties
+    private var cellsIsSelected = Array(repeating: false, count: 7)
+    private var forecasts: [DayForecastWeather] = []
+    
+    // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
@@ -34,122 +31,15 @@ extension CollectionViewController {
         
         guard let cell = cell as? CollectionViewCell else { return UICollectionViewCell() }
         
-        switch indexPath.item {
-        case 0:
-            cell.dateLabel.text = "Сегодня".uppercased()
-        case 1:
-            cell.dateLabel.text = "Завтра".uppercased()
-        default:
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            let dateToConvert = dateFormatter.date(from: forecasts[indexPath.item].date)
-            dateFormatter.dateFormat = "d MMMM"
-            dateFormatter.locale = .current
-            cell.dateLabel.text = dateFormatter.string(from: dateToConvert ?? Date.now).uppercased()
-        }
-        
-        let tempMin = [
-            forecasts[indexPath.item].parts.night.tempAvg,
-            forecasts[indexPath.item].parts.morning.tempAvg,
-            forecasts[indexPath.item].parts.day.tempAvg,
-            forecasts[indexPath.item].parts.evening.tempAvg
-        ].min()?.temp() ?? ""
-        let tempMax = [
-            forecasts[indexPath.item].parts.night.tempAvg,
-            forecasts[indexPath.item].parts.morning.tempAvg,
-            forecasts[indexPath.item].parts.day.tempAvg,
-            forecasts[indexPath.item].parts.evening.tempAvg
-        ].max()?.temp() ?? ""
-        
-        cell.shortImage.image = UIImage(
-            systemName: forecasts[indexPath.item]
-                .parts
-                .day
-                .condition
-                .image
-        )?.withRenderingMode(.alwaysOriginal)
-        cell.shortTemp.text = tempMin + "..." + tempMax
-        cell.shortCondition.text = forecasts[indexPath.item].parts.day.condition.formatted
-//        cell.shortView.backgroundColor
-        
-        cell.nightImage.image = UIImage(
-            systemName: forecasts[indexPath.item]
-                .parts
-                .night
-                .condition
-                .image
-        )?.withRenderingMode(.alwaysOriginal)
-        cell.nightTemp.text = forecasts[indexPath.item]
-            .parts
-            .night
-            .tempAvg
-            .temp()
-        cell.nightCondition.text = forecasts[indexPath.item]
-            .parts
-            .night
-            .condition
-            .formatted
-        
-        cell.morningImage.image = UIImage(
-            systemName: forecasts[indexPath.item]
-                .parts
-                .morning
-                .condition
-                .image
-        )?.withRenderingMode(.alwaysOriginal)
-        cell.morningTemp.text = forecasts[indexPath.item]
-            .parts
-            .morning
-            .tempAvg
-            .temp()
-        cell.morningCondition.text = forecasts[indexPath.item]
-            .parts
-            .morning
-            .condition
-            .formatted
-        
-        cell.dayImage.image = UIImage(
-            systemName: forecasts[indexPath.item]
-                .parts
-                .day
-                .condition
-                .image
-        )?.withRenderingMode(.alwaysOriginal)
-        cell.dayTemp.text = forecasts[indexPath.item]
-            .parts
-            .day
-            .tempAvg
-            .temp()
-        cell.dayCondition.text = forecasts[indexPath.item]
-            .parts
-            .day
-            .condition
-            .formatted
-        
-        cell.eveningImage.image = UIImage(
-            systemName: forecasts[indexPath.item]
-                .parts
-                .evening
-                .condition
-                .image
-        )?.withRenderingMode(.alwaysOriginal)
-        cell.eveningTemp.text = forecasts[indexPath.item]
-            .parts
-            .evening
-            .tempAvg
-            .temp()
-        cell.morningCondition.text = forecasts[indexPath.item]
-            .parts
-            .evening
-            .condition
-            .formatted
+        cell.configureCell(
+            at: indexPath.item,
+            with: forecasts[indexPath.item]
+        )
         
         return cell
     }
-}
-
-// MARK: UICollectionViewDelegate
-extension CollectionViewController {
+    
+    // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else { return }
@@ -172,7 +62,6 @@ extension CollectionViewController {
     }
 }
 
-
 // MARK: UICollectionViewDelegateFlowLayout
 extension CollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -187,19 +76,11 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 }
 
 // MARK: - MainViewControllerDelegate
-extension CollectionViewController {
-    func updateForecastWeather() {
-        NetworkManager.shared.fetchWeather(from: RequestURL.getURL()) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let weather):
-                    self?.forecasts = weather.forecasts
-                    self?.collectionView.reloadData()
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }    }
+extension CollectionViewController: MainViewControllerDelegate {
+    func updateForecast(with forecasts: [DayForecastWeather]) {
+        self.forecasts = forecasts
+        collectionView.reloadData()
+    }
 }
 
 
