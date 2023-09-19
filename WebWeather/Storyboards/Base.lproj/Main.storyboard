@@ -40,6 +40,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ufh-hD-89t">
                                 <rect key="frame" x="16" y="36" width="288" height="381"/>
                                 <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.84999999999999998" contentMode="scaleToFill" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nne-Ev-koF">
+                                        <rect key="frame" x="0.0" y="32" width="288" height="158.5"/>
+                                        <hybridMapConfiguration key="preferredConfiguration"/>
+                                    </mapView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="+99º" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8u-SS-YS6">
                                         <rect key="frame" x="29.5" y="140.5" width="229" height="100"/>
                                         <constraints>
@@ -152,12 +156,14 @@
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="gkr-DQ-van" secondAttribute="bottom" constant="12" id="0hf-lE-Jvu"/>
+                                    <constraint firstAttribute="trailing" secondItem="nne-Ev-koF" secondAttribute="trailing" id="2Wu-HM-67N"/>
                                     <constraint firstItem="2WL-yi-OmB" firstAttribute="trailing" secondItem="4TI-pJ-tsI" secondAttribute="trailing" id="2bD-ye-KwW"/>
                                     <constraint firstItem="gkr-DQ-van" firstAttribute="leading" secondItem="1zc-sg-Rtf" secondAttribute="trailing" constant="2" id="4F5-Xe-2ig"/>
                                     <constraint firstItem="4TI-pJ-tsI" firstAttribute="top" secondItem="k8p-R6-rjB" secondAttribute="top" id="79W-gB-qwV"/>
                                     <constraint firstItem="d8u-SS-YS6" firstAttribute="top" secondItem="wlC-B6-PCR" secondAttribute="bottom" id="8C6-yL-q10"/>
                                     <constraint firstItem="d8u-SS-YS6" firstAttribute="centerX" secondItem="Ufh-hD-89t" secondAttribute="centerX" id="B0D-0M-x67"/>
                                     <constraint firstItem="4TI-pJ-tsI" firstAttribute="trailing" secondItem="EL5-HA-Luf" secondAttribute="trailing" id="Bt0-NU-0JS"/>
+                                    <constraint firstItem="nne-Ev-koF" firstAttribute="top" secondItem="2WL-yi-OmB" secondAttribute="bottom" id="Ddp-hv-150"/>
                                     <constraint firstItem="Ti7-6Z-jUT" firstAttribute="top" secondItem="d8u-SS-YS6" secondAttribute="bottom" id="Dm4-DM-Ryn"/>
                                     <constraint firstItem="k8p-R6-rjB" firstAttribute="top" secondItem="4TI-pJ-tsI" secondAttribute="top" id="FJo-Rx-mMc"/>
                                     <constraint firstItem="d8u-SS-YS6" firstAttribute="centerY" secondItem="Ufh-hD-89t" secondAttribute="centerY" id="Le3-iB-4bl"/>
@@ -172,8 +178,10 @@
                                     <constraint firstItem="wlC-B6-PCR" firstAttribute="centerX" secondItem="d8u-SS-YS6" secondAttribute="centerX" id="cec-yX-V5f"/>
                                     <constraint firstItem="1zc-sg-Rtf" firstAttribute="leading" secondItem="Ufh-hD-89t" secondAttribute="leading" constant="12" id="dNI-QC-d6Y"/>
                                     <constraint firstItem="Ti7-6Z-jUT" firstAttribute="width" secondItem="d8u-SS-YS6" secondAttribute="width" id="dg7-RQ-6lN"/>
+                                    <constraint firstItem="nne-Ev-koF" firstAttribute="bottom" secondItem="d8u-SS-YS6" secondAttribute="centerY" id="g3Z-gM-p0m"/>
                                     <constraint firstAttribute="trailing" secondItem="2WL-yi-OmB" secondAttribute="trailing" id="gVK-U4-fwG"/>
                                     <constraint firstAttribute="trailing" secondItem="gkr-DQ-van" secondAttribute="trailing" constant="12" id="hjG-aa-gF8"/>
+                                    <constraint firstItem="nne-Ev-koF" firstAttribute="leading" secondItem="Ufh-hD-89t" secondAttribute="leading" id="n7h-I1-1oE"/>
                                     <constraint firstItem="Ti7-6Z-jUT" firstAttribute="centerX" secondItem="Ufh-hD-89t" secondAttribute="centerX" id="ocV-gO-aNu"/>
                                     <constraint firstAttribute="bottom" secondItem="1zc-sg-Rtf" secondAttribute="bottom" constant="11.5" id="owo-g9-uau"/>
                                     <constraint firstItem="EL5-HA-Luf" firstAttribute="leading" secondItem="4TI-pJ-tsI" secondAttribute="leading" id="sJX-cj-dFs"/>
@@ -219,6 +227,7 @@
                         <outlet property="forecastView" destination="swE-GL-Z8r" id="Ttg-sc-JO4"/>
                         <outlet property="loadingAIV" destination="DCg-cO-TFa" id="4li-t6-OnY"/>
                         <outlet property="loadingLabel" destination="ON0-u5-GvG" id="b38-fU-MQ2"/>
+                        <outlet property="mapView" destination="nne-Ev-koF" id="oeE-fy-kQe"/>
                         <outlet property="openMenuButton" destination="4TI-pJ-tsI" id="yk6-jI-P3R"/>
                         <outlet property="settingsButton" destination="EL5-HA-Luf" id="hXc-8b-cOf"/>
                         <outlet property="updateWeatherButton" destination="k8p-R6-rjB" id="P7v-At-fPR"/>

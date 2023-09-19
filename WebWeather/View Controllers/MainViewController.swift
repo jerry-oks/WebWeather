@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 import CoreLocation
 
 protocol SettingsViewControllerDelegate: AnyObject {
@@ -18,6 +19,7 @@ final class MainViewController: UIViewController {
     @IBOutlet private var loadingAIV: UIActivityIndicatorView!
     @IBOutlet private var loadingLabel: UILabel!
     
+    @IBOutlet private var mapView: MKMapView!
     @IBOutlet private var factView: UIView!
     @IBOutlet private var forecastView: UIView!
     
@@ -137,6 +139,8 @@ private extension MainViewController {
     }
     
     func setupInterface() {
+        configureMapView()
+        
         //        factView.backgroundColor =
         cityLabel.text = "\(weather.geoObject.locality.name), погода сейчас".uppercased()
         factIV.image = UIImage(
@@ -147,9 +151,11 @@ private extension MainViewController {
         factTempLabel.text = settings["temp"] == "ºF"
         ? weather.fact.temp.tempF() + "F"
         : weather.fact.temp.tempC() + "C"
-        feelsLikeTempLabel.text = "ощущается как " + (settings["temp"] == "ºF"
-                                                      ? weather.fact.feelsLike.tempF()
-                                                      : weather.fact.feelsLike.tempC())
+        feelsLikeTempLabel.text = "ощущается как " + (
+            settings["temp"] == "ºF"
+            ? weather.fact.feelsLike.tempF()
+            : weather.fact.feelsLike.tempC()
+        )
         conditionLabel.text = weather.fact.condition.formatted
         
         detailsLabel.text =
@@ -196,6 +202,26 @@ private extension MainViewController {
             updateWeatherButton.alpha = opened ? 0 : 1
             updateWeatherButton.frame.origin.y += opened ? -64 : 64
         }
+    }
+    
+    func configureMapView() {
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        
+        mapView.setRegion(region, animated: false)
+        mapView.showsUserLocation = false
+        
+        mapView.subviews[1].isHidden = true
+        mapView.subviews[2].isHidden = true
+        mapView.isUserInteractionEnabled = false
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = mapView.bounds
+        gradient.colors = [UIColor.white.cgColor, UIColor.clear.cgColor]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1)
+        
+        mapView.layer.mask = gradient
     }
     
     // MARK: -  Alert Methods
