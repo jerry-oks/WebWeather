@@ -9,6 +9,7 @@ import UIKit
 
 protocol MainViewControllerDelegate: AnyObject {
     func updateForecast(with forecasts: [DayForecastWeather])
+    func updateInterface(withTempUnit: String)
 }
 
 final class CollectionViewController: UICollectionViewController {
@@ -16,6 +17,7 @@ final class CollectionViewController: UICollectionViewController {
     // MARK: - Private Properties
     private var cellsIsSelected = Array(repeating: false, count: 7)
     private var forecasts: [DayForecastWeather] = []
+    private var temp = "default"
     
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -33,7 +35,8 @@ final class CollectionViewController: UICollectionViewController {
         
         cell.configureCell(
             at: indexPath.item,
-            with: forecasts[indexPath.item]
+            with: forecasts[indexPath.item],
+            tempUnit: temp
         )
         
         return cell
@@ -79,6 +82,11 @@ extension CollectionViewController: UICollectionViewDelegateFlowLayout {
 extension CollectionViewController: MainViewControllerDelegate {
     func updateForecast(with forecasts: [DayForecastWeather]) {
         self.forecasts = forecasts
+        collectionView.reloadData()
+    }
+    
+    func updateInterface(withTempUnit: String) {
+        temp = withTempUnit
         collectionView.reloadData()
     }
 }

@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ya_pogoda__.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -31,7 +31,7 @@ enum Condition: String, Decodable {
     var formatted: String {
         switch self {
         case .clear:
-            return "ясно"
+            return "ясно       "
         case .partlyCloudy:
             return "переменно облачно"
         case .cloudy:
@@ -49,7 +49,7 @@ enum Condition: String, Decodable {
         case .heavyRain:
             return "сильный дождь"
         case .continuousHeavyRain:
-            return "продолжительный сильный дождь"
+            return "ливень"
         case .showers:
             return "ливень"
         case .wetSnow:
@@ -90,9 +90,69 @@ enum Condition: String, Decodable {
         case .hail:
             return "cloud.hail.fill"
         case .thunderstorm:
-            return "cloud.bolt.fill"
+            return "cloud.sun.bolt.fill"
         case .thunderstormWithRain,.thunderstormWithHail:
             return "cloud.bolt.rain.fill"
+        }
+    }
+    
+    var nightImage: String {
+        switch self {
+        case .clear:
+            return "moon.stars.fill"
+        case .partlyCloudy:
+            return "cloud.moon.fill"
+        case .cloudy, .overcast:
+            return "cloud.fill"
+        case .drizzle, .lightRain:
+            return "cloud.moon.rain.fill"
+        case .rain, .moderateRain:
+            return "cloud.rain.fill"
+        case .heavyRain, .continuousHeavyRain, .showers:
+            return "cloud.heavyrain.fill"
+        case .wetSnow, .lightSnow, .snow, .snowShowers:
+            return "cloud.snow.fill"
+        case .hail:
+            return "cloud.hail.fill"
+        case .thunderstorm:
+            return "cloud.moon.bolt.fill"
+        case .thunderstormWithRain,.thunderstormWithHail:
+            return "cloud.bolt.rain.fill"
+        }
+    }
+}
+
+enum WindDir: String, Decodable {
+case nw = "nw"
+case n = "n"
+case ne = "ne"
+case e = "e"
+case se = "se"
+case s = "s"
+case sw = "sw"
+case w = "w"
+case c = "c"
+    
+    var formatted: String {
+        switch self {
+        case .nw:
+            return "↘︎ СЗ"
+        case .n:
+            return "↓ С"
+        case .ne:
+            return "↙︎ СВ"
+        case .e:
+            return "← В"
+        case .se:
+            return "↖︎ ЮВ"
+        case .s:
+            return "↑ Ю"
+        case .sw:
+            return "↗︎ ЮЗ"
+        case .w:
+            return "→ З"
+        case .c:
+            return "штиль"
         }
     }
 }
@@ -106,16 +166,18 @@ struct Weather: Decodable {
 struct FactWeather: Decodable {
     let condition: Condition
     let temp: Int
+    let daytime: String
     let feelsLike: Int
     let windSpeed: Double
     let windGust: Double
-    let windDir: String
-    let pressureMm: Int
+    let windDir: WindDir
+    let pressureMm: Double
     let humidity: Int
+
 }
 
 struct GeoObject: Decodable {
-    let province: GeoObjectName
+    let locality: GeoObjectName
 }
 
 struct GeoObjectName: Decodable {
@@ -149,10 +211,10 @@ struct RequestURL {
     let extra: String
     let key: String
     
-    static func getURL() -> URLRequest {
+    static func getURL(lat: String, lon: String) -> URLRequest {
         let requestUrl = RequestURL(
-            lat: "55.751244",
-            lon: "37.618423",
+            lat: lat,
+            lon: lon,
             lang: "ru_RU",
             limit: "7",
             hours: "false",

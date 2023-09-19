@@ -17,6 +17,8 @@
 		3B2C9B482AB2740A00F3653C /* Extension + Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2C9B472AB2740A00F3653C /* Extension + Int.swift */; };
 		3B3CE0382AB04FC6001AB752 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3CE0372AB04FC6001AB752 /* NetworkManager.swift */; };
 		3B3CE03D2AB076F9001AB752 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */; };
+		3B3E0CA12AB794B500BDB0CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3E0CA02AB794B500BDB0CE /* SettingsViewController.swift */; };
+		3B3E0CA32AB7A36D00BDB0CE /* Extension + Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3E0CA22AB7A36D00BDB0CE /* Extension + Double.swift */; };
 		3B43B5432AB08A7E007FC659 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B43B5422AB08A7E007FC659 /* CollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +35,8 @@
 		3B2C9B472AB2740A00F3653C /* Extension + Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Int.swift"; sourceTree = "<group>"; };
 		3B3CE0372AB04FC6001AB752 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
+		3B3E0CA02AB794B500BDB0CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		3B3E0CA22AB7A36D00BDB0CE /* Extension + Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Double.swift"; sourceTree = "<group>"; };
 		3B43B5422AB08A7E007FC659 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,7 @@
 			children = (
 				3B2910A22AADF82D00C59E9A /* MainViewController.swift */,
 				3B3CE03C2AB076F9001AB752 /* CollectionViewController.swift */,
+				3B3E0CA02AB794B500BDB0CE /* SettingsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2C9B472AB2740A00F3653C /* Extension + Int.swift */,
+				3B3E0CA22AB7A36D00BDB0CE /* Extension + Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +160,8 @@
 			dependencies = (
 			);
 			name = WebWeather;
+			packageProductDependencies = (
+			);
 			productName = WebWeather;
 			productReference = 3B29109B2AADF82D00C59E9A /* WebWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +190,8 @@
 				Base,
 			);
 			mainGroup = 3B2910922AADF82D00C59E9A;
+			packageReferences = (
+			);
 			productRefGroup = 3B29109C2AADF82D00C59E9A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -209,6 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B3E0CA32AB7A36D00BDB0CE /* Extension + Double.swift in Sources */,
 				3B3CE03D2AB076F9001AB752 /* CollectionViewController.swift in Sources */,
 				3B2910B72AADFA6300C59E9A /* Weather.swift in Sources */,
 				3B2910A32AADF82D00C59E9A /* MainViewController.swift in Sources */,
@@ -217,6 +228,7 @@
 				3B3CE0382AB04FC6001AB752 /* NetworkManager.swift in Sources */,
 				3B29109F2AADF82D00C59E9A /* AppDelegate.swift in Sources */,
 				3B2910A12AADF82D00C59E9A /* SceneDelegate.swift in Sources */,
+				3B3E0CA12AB794B500BDB0CE /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +304,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationTemporaryUsageDescriptionDictionary = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Доступ к геолокации нужен для отображения погоды по вашему местоположению";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -346,6 +361,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "";
+				INFOPLIST_KEY_NSLocationTemporaryUsageDescriptionDictionary = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Доступ к геолокации нужен для отображения погоды по вашему местоположению";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -371,6 +389,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -403,6 +422,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
