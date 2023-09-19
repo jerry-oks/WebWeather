@@ -33,7 +33,7 @@ final class CollectionViewCell: UICollectionViewCell {
     @IBOutlet private var eveningTemp: UILabel!
     @IBOutlet private var eveningCondition: UILabel!
     
-    func configureCell(at index: Int, with forecast: DayForecastWeather) {
+    func configureCell(at index: Int, with forecast: DayForecastWeather, tempUnit temp: String) {
         setupTitleTabel()
         setupShortenedCell()
         setupExpandedCell()
@@ -60,44 +60,55 @@ final class CollectionViewCell: UICollectionViewCell {
                 forecast.parts.morning.tempAvg,
                 forecast.parts.day.tempAvg,
                 forecast.parts.evening.tempAvg
-            ].min()?.temp() ?? ""
+            ].min() ?? 0
             let tempMax = [
                 forecast.parts.night.tempAvg,
                 forecast.parts.morning.tempAvg,
                 forecast.parts.day.tempAvg,
                 forecast.parts.evening.tempAvg
-            ].max()?.temp() ?? ""
+            ].max() ?? 0
+            
+            let min = temp == "ºF" ? tempMin.tempF() : tempMin.tempC()
+            let max = temp == "ºF" ? tempMax.tempF() : tempMax.tempC()
             
             //shortView.backgroundColor =
             shortImage.image = UIImage(systemName: forecast.parts.day.condition.image)?
                 .withRenderingMode(.alwaysOriginal)
-            shortTemp.text = tempMin + "..." + tempMax
+            shortTemp.text = min + "..." + max
             shortCondition.text = forecast.parts.day.condition.formatted
         }
         
         func setupExpandedCell() {
             nightImage.image = UIImage(
-                systemName: forecast.parts.night.condition.image
+                systemName: forecast.parts.night.condition.nightImage
             )?.withRenderingMode(.alwaysOriginal)
-            nightTemp.text = forecast.parts.night.tempAvg.temp()
+            nightTemp.text = temp == "ºF"
+            ? forecast.parts.night.tempAvg.tempF()
+            : forecast.parts.night.tempAvg.tempC()
             nightCondition.text = forecast.parts.night.condition.formatted
-            
+
             morningImage.image = UIImage(
                 systemName: forecast.parts.morning.condition.image
             )?.withRenderingMode(.alwaysOriginal)
-            morningTemp.text = forecast.parts.morning.tempAvg.temp()
+            morningTemp.text = temp == "ºF"
+            ? forecast.parts.morning.tempAvg.tempF()
+            : forecast.parts.morning.tempAvg.tempC()
             morningCondition.text = forecast.parts.morning.condition.formatted
             
             dayImage.image = UIImage(
                 systemName: forecast.parts.day.condition.image
             )?.withRenderingMode(.alwaysOriginal)
-            dayTemp.text = forecast.parts.day.tempAvg.temp()
+            dayTemp.text = temp == "ºF"
+            ? forecast.parts.day.tempAvg.tempF()
+            : forecast.parts.day.tempAvg.tempC()
             dayCondition.text = forecast.parts.day.condition.formatted
-            
+
             eveningImage.image = UIImage(
                 systemName: forecast.parts.evening.condition.image
             )?.withRenderingMode(.alwaysOriginal)
-            eveningTemp.text = forecast.parts.evening.tempAvg.temp()
+            eveningTemp.text = temp == "ºF"
+            ? forecast.parts.evening.tempAvg.tempF()
+            : forecast.parts.evening.tempAvg.tempC()
             eveningCondition.text = forecast.parts.evening.condition.formatted
         }
     }
