@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Condition: String, Decodable {
+enum Condition: String {
     case clear = "clear"
     case partlyCloudy = "partly-cloudy"
     case cloudy = "cloudy"
@@ -122,16 +122,16 @@ enum Condition: String, Decodable {
     }
 }
 
-enum WindDir: String, Decodable {
-case nw = "nw"
-case n = "n"
-case ne = "ne"
-case e = "e"
-case se = "se"
-case s = "s"
-case sw = "sw"
-case w = "w"
-case c = "c"
+enum WindDir: String {
+    case nw = "nw"
+    case n = "n"
+    case ne = "ne"
+    case e = "e"
+    case se = "se"
+    case s = "s"
+    case sw = "sw"
+    case w = "w"
+    case c = "c"
     
     var formatted: String {
         switch self {
@@ -156,14 +156,40 @@ case c = "c"
         }
     }
 }
-    
-struct Weather: Decodable {
+
+struct Weather {
     let geoObject: GeoObject
     let fact: FactWeather
     let forecasts: [DayForecastWeather]
+    
+    init(weatherData: [String: Any]) {
+        geoObject = GeoObject(
+            geoObject: weatherData["geo_object"] as? [String: Any] ?? [:]
+        )
+        fact = FactWeather(
+            factWeather: weatherData["fact"] as? [String: Any] ?? [:]
+        )
+        forecasts = getForecasts()
+        
+        func getForecasts() -> [DayForecastWeather] {
+            var forecasts: [DayForecastWeather] = []
+            
+            let forecastsData = weatherData["forecasts"] as? [[String: Any]] ?? []
+            forecastsData.forEach { forecast in
+                forecasts.append(DayForecastWeather(dayForecastWeather: forecast))
+            }
+            
+            return forecasts
+        }
+    }
+    
+    static func getWeather(from json: Any) -> Weather {
+        let weatherData = json as? [String: Any]
+        return Weather(weatherData: weatherData!)
+    }
 }
 
-struct FactWeather: Decodable {
+struct FactWeather {
     let condition: Condition
     let temp: Int
     let daytime: String
@@ -173,33 +199,89 @@ struct FactWeather: Decodable {
     let windDir: WindDir
     let pressureMm: Double
     let humidity: Int
-
+    
+    init(factWeather: [String: Any]) {
+        condition = Condition(
+            rawValue: factWeather["condition"] as? String ?? ""
+        ) ?? .clear
+        temp = factWeather["temp"] as? Int ?? 0
+        daytime = factWeather["daytime"] as? String ?? ""
+        feelsLike = factWeather["feels_like"] as? Int ?? 0
+        windSpeed = factWeather["wind_speed"] as? Double ?? 0
+        windGust = factWeather["wind_gust"] as? Double ?? 0
+        windDir = WindDir(
+            rawValue: factWeather["wind_dir"] as? String ?? ""
+        ) ?? .c
+        pressureMm = factWeather["pressure_mm"] as? Double ?? 0
+        humidity = factWeather["humidity"] as? Int ?? 0
+    }
 }
 
-struct GeoObject: Decodable {
+struct GeoObject {
     let locality: GeoObjectName
+    
+    init(geoObject: [String: Any]) {
+        locality = GeoObjectName(
+            geoObjectName: geoObject["locality"] as? [String : Any] ?? [:]
+        )
+    }
+    
 }
 
-struct GeoObjectName: Decodable {
+struct GeoObjectName {
     let name: String
+    
+    init(geoObjectName: [String: Any]) {
+        name = geoObjectName["name"] as? String ?? ""
+    }
 }
 
-struct DayForecastWeather: Decodable {
+struct DayForecastWeather {
     let date: String
     let parts: PartOfTheDayWeather
+    
+    init(dayForecastWeather: [String: Any]) {
+        date = dayForecastWeather["date"] as? String ?? ""
+        parts = PartOfTheDayWeather(
+            partOfTheDayWeather: dayForecastWeather["parts"] as? [String: Any] ?? [:]
+        )
+    }
 }
 
-struct PartOfTheDayWeather: Decodable {
+struct PartOfTheDayWeather {
+    let night: WeatherCondition
     let morning: WeatherCondition
     let day: WeatherCondition
     let evening: WeatherCondition
-    let night: WeatherCondition
+    
+    init(partOfTheDayWeather: [String: Any]) {
+        night = WeatherCondition(
+            weatherCondition: partOfTheDayWeather["night"] as? [String : Any] ?? [:]
+        )
+        morning = WeatherCondition(
+            weatherCondition: partOfTheDayWeather["morning"] as? [String : Any] ?? [:]
+        )
+        day = WeatherCondition(
+            weatherCondition: partOfTheDayWeather["day"] as? [String : Any] ?? [:]
+        )
+        evening = WeatherCondition(
+            weatherCondition: partOfTheDayWeather["evening"] as? [String : Any] ?? [:]
+        )
+    }
 }
 
-struct WeatherCondition: Decodable {
+struct WeatherCondition {
     let condition: Condition
     let tempAvg: Int
     let feelsLike: Int
+    
+    init(weatherCondition: [String: Any]) {
+        condition = Condition(
+            rawValue: weatherCondition["condition"] as? String ?? ""
+        ) ?? .clear
+        tempAvg = weatherCondition["temp_avg"] as? Int ?? 0
+        feelsLike = weatherCondition["feels_like"] as? Int ?? 0
+    }
 }
 
 struct RequestURL {

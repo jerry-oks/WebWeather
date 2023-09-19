@@ -6,41 +6,24 @@
 //
 
 import Foundation
-
-enum NetworkError: Error {
-    case invalidURL
-    case noData
-    case decodingError
-}
+import Alamofire
 
 final class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
     
-    func fetchWeather(from url: URLRequest, completion: @escaping (Result<Weather, NetworkError>) -> Void) {
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data else {
-                completion(.failure(.noData))
-                print(error?.localizedDescription ?? "No error description")
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let weather = try decoder.decode(Weather.self, from: data)
-                
-                DispatchQueue.main.async {
+    func fetchWeather(from url: URLRequest, completion: @escaping (Result<Weather, AFError>) -> Void) {
+        AF.request(url)
+            .validate()
+            .responseJSON { dataResponse in
+                switch dataResponse.result {
+                case .success(let jsonValue):
+                    let weather = Weather.getWeather(from: jsonValue)
                     completion(.success(weather))
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-                
-                print("DATA:\n\(data)\n\nRESPONSE:\n\(String(describing: response))")
-            } catch {
-                completion(.failure(.decodingError))
-                
-                print("ERROR:\n\(error)")
             }
-        }.resume()
     }
 }
