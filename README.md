@@ -8,6 +8,7 @@
 + MVC
 + UIKit
 + Swift Package Manager (SPM)
++ URLSession
 + Alamofire
 + REST API
 + JSON
@@ -18,7 +19,7 @@
 ## Цели и задачи
 + парсинг JSON вручную и автоматически (провайдер - Яндекс.Погода)
 + изучение MapKit, CoreLocation, UISegmentedControl, UICollectionView
-+ работа с сетевыми запросами с помощью Alamofire
++ работа с сетевыми запросами с помощью URLSession и Alamofire
 + проработка передачи данных между экранами с помощью паттерна делегирования
 
 ## Превью
